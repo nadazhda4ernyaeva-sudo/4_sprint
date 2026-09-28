@@ -1,8 +1,9 @@
-package object_2; // Моя папка для тестов
+package test; // Моя папка для тестов
 
-import org.example.object_1.MainPage; // Подтягиваем главную страницу из первой папки
+import org.example.page.MainPage; // Подтягиваем главную страницу из первой папки
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -15,9 +16,11 @@ import static org.junit.Assert.assertEquals;
 @RunWith(Parameterized.class) // Наш тест будет параметризованным
 public class MainPageTest {
 
+    private static final String BASE_URL = "https://qa-scooter.praktikum-services.ru/";
+
     private WebDriver driver;
-    private final int index;          // Сюда по очереди будут подставляться номера строк от 0 до 7
-    private final String expectedText; // Сюда будет подставляться правильный текст ответа
+    private final int index;// Сюда по очереди будут подставляться номера строк от 0 до 7
+    private final String expectedText;// Сюда будет подставляться правильный текст ответа
 
     public MainPageTest(int index, String expectedText) {
         this.index = index;
@@ -38,17 +41,19 @@ public class MainPageTest {
                 {7, "Да, обязательно. Всем самокатов! И Москве, и Московской области."}
         };
     }
+    @BeforeClass
+    public static void globalSetup() {
+        io.github.bonigarcia.wdm.WebDriverManager.chromedriver().setup();
+    }
 
     @Before
     public void setUp() {
 
-        io.github.bonigarcia.wdm.WebDriverManager.chromedriver().setup();
+       ChromeOptions options = new ChromeOptions();
 
-        ChromeOptions options = new ChromeOptions();
-
-        options.addArguments("--no-sandbox", "--headless", "--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox", "--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
-        driver.get("https://praktikum-services.ru");
+        driver.get(BASE_URL);
     }
 
     @Test

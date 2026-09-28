@@ -1,7 +1,7 @@
-package object_2; // Моя папка для тестов
+package test; // Моя папка для тестов
 
-import org.example.object_1.MainPage;  // Подтягиваем первую страницу
-import org.example.object_1.OrderPage; // Подтягиваем вторую страницу
+import org.example.page.MainPage;  // Подтягиваем первую страницу
+import org.example.page.OrderPage; // Подтягиваем вторую страницу
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

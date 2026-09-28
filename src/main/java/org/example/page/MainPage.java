@@ -1,4 +1,4 @@
-package org.example.object_1; // Моя папка для описания страниц
+package org.example.page; // Моя папка для описания страниц
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
